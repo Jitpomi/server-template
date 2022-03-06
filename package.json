@@ -1,6 +1,6 @@
 {
   "name": "training-server",
-  "description": "Rest GraphQL and Websocket API For the training app",
+  "description": "Rest Graphql and websockets server for the training app",
   "version": "0.0.0",
   "homepage": "",
   "private": true,
@@ -37,9 +37,6 @@
     "ignore": []
   },
   "dependencies": {
-    "@feathersjs/authentication": "^4.5.12",
-    "@feathersjs/authentication-local": "^4.5.12",
-    "@feathersjs/authentication-oauth": "^4.5.12",
     "@feathersjs/configuration": "^4.5.12",
     "@feathersjs/errors": "^4.5.12",
     "@feathersjs/express": "^4.5.12",
