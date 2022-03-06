@@ -1,6 +1,6 @@
 # training-server
 
-> Rest Graphql and websockets server for the training app
+> rest grapghql and websockets api for the training app
 
 ## About
 

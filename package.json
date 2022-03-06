@@ -1,6 +1,6 @@
 {
   "name": "training-server",
-  "description": "Rest Graphql and websockets server for the training app",
+  "description": "rest grapghql and websockets api for the training app",
   "version": "0.0.0",
   "homepage": "",
   "private": true,
@@ -24,11 +24,12 @@
     "npm": ">= 3.0.0"
   },
   "scripts": {
-    "test": "npm run lint && npm run mocha",
-    "lint": "eslint src/. test/. --config .eslintrc.json --fix",
-    "dev": "nodemon src/",
-    "start": "node src/",
-    "mocha": "mocha test/ --recursive --exit"
+    "test": "npm run lint && npm run compile && npm run mocha",
+    "lint": "eslint src/. test/. --config .eslintrc.json --ext .ts --fix",
+    "dev": "ts-node-dev --no-notify src/",
+    "start": "npm run compile && node lib/",
+    "mocha": "mocha --require ts-node/register --require source-map-support/register \"test/**/*.ts\" --recursive --exit",
+    "compile": "shx rm -rf lib/ && tsc"
   },
   "standard": {
     "env": [
@@ -36,6 +37,7 @@
     ],
     "ignore": []
   },
+  "types": "lib/",
   "dependencies": {
     "@feathersjs/configuration": "^4.5.12",
     "@feathersjs/errors": "^4.5.12",
@@ -50,9 +52,17 @@
     "winston": "^3.6.0"
   },
   "devDependencies": {
+    "@types/compression": "^1.7.2",
+    "@types/cors": "^2.8.12",
+    "@types/mocha": "^9.1.0",
+    "@types/serve-favicon": "^2.5.3",
+    "@typescript-eslint/eslint-plugin": "^5.13.0",
+    "@typescript-eslint/parser": "^5.13.0",
     "axios": "^0.26.0",
     "eslint": "^8.10.0",
     "mocha": "^9.2.1",
-    "nodemon": "^2.0.15"
+    "shx": "^0.3.4",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.6.2"
   }
 }
