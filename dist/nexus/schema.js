@@ -9,7 +9,7 @@ export const schema = makeSchema({
     types: [],
     outputs: {
         typegen: join(__dirname, '..', 'graphql', 'nexus-typegen.ts'),
-        schema: join(__dirname, '..', 'graphql', 'schema.graphql'),
+        schema: join(__dirname, '..', 'graphql', 'schema.graphql'), // 3
     },
-    shouldExitAfterGenerateArtifacts: process.env.NEXUS_SHOULD_EXIT_AFTER_GENERATE_ARTIFACTS === 'true',
 });
+//# sourceMappingURL=schema.js.map

@@ -9,3 +9,4 @@ const logger = createLogger({
     ],
 });
 export default logger;
+//# sourceMappingURL=logger.js.map

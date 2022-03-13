@@ -3,3 +3,4 @@
  * Do not make changes to this file directly
  */
 export {};
+//# sourceMappingURL=nexus-typegen.js.map

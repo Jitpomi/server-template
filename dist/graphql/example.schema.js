@@ -13,3 +13,4 @@ const resolvers = {
     },
 };
 export default makeExecutableSchema({ typeDefs, resolvers });
+//# sourceMappingURL=example.schema.js.map

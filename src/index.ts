@@ -3,15 +3,15 @@ import app from './app';
 import fs from 'fs';
 import https from 'https';
 const port = app.get('port');
-import { join, dirname } from 'path';
+import { join, dirname} from 'path';
 // @ts-ignore
 import { WebSocketServer } from 'ws';
 import { useServer } from 'graphql-ws/lib/use/ws';
-
 import express from '@feathersjs/express';
 import { ApolloServer } from 'apollo-server-express';
 import { ApolloServerPluginDrainHttpServer } from 'apollo-server-core';
-import schema from './graphql/example.schema';
+// import schema from './graphql/example.schema';
+import { schema } from './nexus/schema';
 
 import {fileURLToPath} from 'url';
 

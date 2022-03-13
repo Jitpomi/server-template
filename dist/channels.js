@@ -47,3 +47,4 @@ export default function (app) {
     //   ];
     // });
 }
+//# sourceMappingURL=channels.js.map
