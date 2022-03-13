@@ -4,7 +4,6 @@ import fs from 'fs';
 import https from 'https';
 const port = app.get('port');
 import { join, dirname } from 'path';
-// @ts-ignore
 import { WebSocketServer } from 'ws';
 import { useServer } from 'graphql-ws/lib/use/ws';
 import express from '@feathersjs/express';

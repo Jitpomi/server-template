@@ -4,12 +4,12 @@
     "node": true,
     "mocha": true
   },
-
   "parserOptions": {
     "parser": "@typescript-eslint/parser",
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
+  "ignorePatterns": [ "**/graphql/"],
   "plugins": [
     "@typescript-eslint"
   ],
