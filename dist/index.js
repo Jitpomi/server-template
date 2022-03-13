@@ -4,6 +4,9 @@ import fs from 'fs';
 import https from 'https';
 const port = app.get('port');
 import { join, dirname } from 'path';
+// @ts-ignore
+import { WebSocketServer } from 'ws';
+import { useServer } from 'graphql-ws/lib/use/ws';
 import express from '@feathersjs/express';
 import { ApolloServer } from 'apollo-server-express';
 import { ApolloServerPluginDrainHttpServer } from 'apollo-server-core';
@@ -18,9 +21,33 @@ async function listen(port) {
         key: fs.readFileSync(join(__dirname, '..', 'ssl', 'example.com+2-key.pem')),
         cert: fs.readFileSync(join(__dirname, '..', 'ssl', 'example.com+2.pem'))
     }, app);
+    // Creating the WebSocket server
+    const wsServer = new WebSocketServer({
+        // This is the `httpServer` we created in a previous step.
+        server: httpServer,
+        // Pass a different path here if your ApolloServer serves at
+        // a different path.
+        path: '/graphql',
+    });
+    // Hand in the schema we just created and have the
+    // WebSocketServer start listening.
+    const serverCleanup = useServer({ schema }, wsServer);
     const apolloServer = new ApolloServer({
-        ...schema,
-        plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
+        schema,
+        plugins: [
+            // Proper shutdown for the HTTP server.
+            ApolloServerPluginDrainHttpServer({ httpServer }),
+            // Proper shutdown for the WebSocket server.
+            {
+                async serverWillStart() {
+                    return {
+                        async drainServer() {
+                            await serverCleanup.dispose();
+                        },
+                    };
+                },
+            },
+        ],
     });
     // Call app.setup to initialize all services and SocketIO
     app.setup(httpServer);
