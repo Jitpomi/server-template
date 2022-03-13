@@ -4,6 +4,7 @@ import fs from 'fs';
 import https from 'https';
 const port = app.get('port');
 import { join, dirname } from 'path';
+import express from '@feathersjs/express';
 import { ApolloServer } from 'apollo-server-express';
 import { ApolloServerPluginDrainHttpServer } from 'apollo-server-core';
 import schema from './graphql/example.schema';
@@ -25,6 +26,7 @@ async function listen(port) {
     app.setup(httpServer);
     await apolloServer.start();
     apolloServer.applyMiddleware({ app });
+    app.use(express.notFound());
     return new Promise((resolve, reject) => {
         // process.on('unhandledRejection', (reason, p) =>
         //   logger.error('Unhandled Rejection at: Promise ', p, reason)
