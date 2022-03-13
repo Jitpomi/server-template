@@ -10,6 +10,7 @@ console.log('directory-name 👉️', __dirname);
 
 export const schema = makeSchema({
   types:[],
+  shouldExitAfterGenerateArtifacts: process.env.NEXUS_SHOULD_EXIT_AFTER_GENERATE_ARTIFACTS === 'true',
   outputs: {
     typegen: join(__dirname, '..','graphql', 'nexus-typegen.ts'), // 2
     schema: join(__dirname, '..', 'graphql','schema.graphql'), // 3

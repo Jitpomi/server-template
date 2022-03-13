@@ -1,6 +1,6 @@
 {
-  "name": "training-server",
-  "description": "rest grapghql and websockets api for the training app",
+  "name": "server",
+  "description": "A rest, grapghql and websockets api",
   "version": "0.0.0",
   "homepage": "",
   "private": true,
@@ -10,7 +10,7 @@
   ],
   "author": {
     "name": "Samson  Ssali",
-    "email": "samson@ionrev.com"
+    "email": "ssali@jitpomi.com"
   },
   "contributors": [],
   "bugs": {},
