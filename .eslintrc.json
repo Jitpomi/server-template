@@ -9,6 +9,7 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
+  "ignorePatterns": [ "**/graphql/"],
   "plugins": [
     "@typescript-eslint"
   ],

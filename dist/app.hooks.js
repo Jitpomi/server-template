@@ -29,3 +29,4 @@ export default {
         remove: []
     }
 };
+//# sourceMappingURL=app.hooks.js.map

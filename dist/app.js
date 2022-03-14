@@ -40,3 +40,4 @@ app.configure(channels);
 app.use(express.errorHandler({ logger }));
 app.hooks(appHooks);
 export default app;
+//# sourceMappingURL=app.js.map

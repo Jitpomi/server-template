@@ -6,15 +6,15 @@ const typeDefs = gql`
   type Query {
     hello: String
   }
-`
+`;
 
 const resolvers = {
   Query: {
     hello() {
-      return 'world'
+      return 'world';
     },
   },
-}
+};
 
 
 export default makeExecutableSchema({ typeDefs, resolvers });

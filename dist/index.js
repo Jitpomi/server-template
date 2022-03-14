@@ -4,13 +4,13 @@ import fs from 'fs';
 import https from 'https';
 const port = app.get('port');
 import { join, dirname } from 'path';
-// @ts-ignore
 import { WebSocketServer } from 'ws';
 import { useServer } from 'graphql-ws/lib/use/ws';
 import express from '@feathersjs/express';
 import { ApolloServer } from 'apollo-server-express';
 import { ApolloServerPluginDrainHttpServer } from 'apollo-server-core';
-import schema from './graphql/example.schema';
+// import schema from './graphql/example.schema';
+import { schema } from './nexus/schema';
 import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 // 👇️ "/home/john/Desktop/javascript"
@@ -64,10 +64,11 @@ async function listen(port) {
 (async () => {
     try {
         await listen(port);
-        logger.info('GraphQl application started on https://%s:%d/%s', app.get('host'), port, 'graphql');
-        logger.info('Rest application started on https://%s:%d', app.get('host'), port);
+        logger.info('GraphQl api started on https://%s:%d/%s', app.get('host'), port, 'graphql');
+        logger.info('Rest api started on https://%s:%d', app.get('host'), port);
     }
     catch (reason) {
         logger.error('Unhandled Rejection at: Promise ', reason);
     }
 })();
+//# sourceMappingURL=index.js.map
