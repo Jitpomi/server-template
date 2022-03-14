@@ -1,4 +1,5 @@
 import { gql } from 'apollo-server-express';
+import { makeExecutableSchema } from '@graphql-tools/schema';
 const typeDefs = gql `
   type Query {
     hello: String
@@ -11,7 +12,4 @@ const resolvers = {
         },
     },
 };
-export default {
-    typeDefs,
-    resolvers,
-};
+export default makeExecutableSchema({ typeDefs, resolvers });
