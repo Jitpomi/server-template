@@ -1,10 +1,14 @@
-# training-server
+# server-template
 
 > rest grapghql and websockets api for the training app
 
 ## About
 
-This project uses [Feathers](http://feathersjs.com). An open source web framework for building modern real-time applications.
+This project's rest api is powered by [Feathers](http://feathersjs.com). An open source web framework for building modern real-time applications.
+
+This graphql api is powered by:
+~ [Apollo Express Server](https://github.com/apollographql/apollo-server). an open-source, spec-compliant GraphQL server that's compatible with any GraphQL client, including Apollo Client.
+~ [Nexus](https://github.com/graphql-nexus/nexus) A Declarative, Code-First GraphQL Schemas for JavaScript/TypeScript.
 
 ## Getting Started
 
@@ -17,8 +21,16 @@ Getting up and running is as easy as 1, 2, 3.
     cd path/to/training-server
     npm install
     ```
+    
+ 2. Create an ssl/ directory, [install mkcert](https://www.gogetssl.com/wiki/ssl-basics/ssl-for-localhost/) and use it to [generate an SSL certificate](https://words.filippo.io/mkcert-valid-https-certificates-for-localhost/) to use in development following these commands (If you're a Macos Users)
 
-3. Start your app
+    ```
+    brew install mkcert
+    brew install nss # if you use Firefox
+    mkcert -install
+    ```   
+
+4. Start your app
 
     ```
     npm start
