@@ -64,8 +64,8 @@ async function listen(port) {
 (async () => {
     try {
         await listen(port);
-        logger.info('GraphQl application started on https://%s:%d/%s', app.get('host'), port, 'graphql');
-        logger.info('Rest application started on https://%s:%d', app.get('host'), port);
+        logger.info('GraphQl api started on https://%s:%d/%s', app.get('host'), port, 'graphql');
+        logger.info('Rest api started on https://%s:%d', app.get('host'), port);
     }
     catch (reason) {
         logger.error('Unhandled Rejection at: Promise ', reason);
