@@ -3,7 +3,12 @@ import app from './app';
 import fs from 'fs';
 import https from 'https';
 const port = app.get('port');
-import { join, dirname } from 'path'
+import { join, dirname } from 'path';
+
+import express from '@feathersjs/express';
+import { ApolloServer } from 'apollo-server-express';
+import { ApolloServerPluginDrainHttpServer } from 'apollo-server-core';
+import schema from './graphql/example.schema';
 
 import {fileURLToPath} from 'url';
 
@@ -13,32 +18,43 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 console.log('directory-name 👉️', __dirname);
 
-// const server = app.listen(port);
-
-process.on('unhandledRejection', (reason, p) =>
-  logger.error('Unhandled Rejection at: Promise ', p, reason)
-);
-
-// server.on('listening', () =>
-//   logger.info('Feathers application started on http://%s:%d', app.get('host'), port)
-// );
+async function listen(port: number) {
 
 
+  const httpServer = https.createServer({
+    key: fs.readFileSync(join(__dirname, '..','ssl', 'example.com+2-key.pem')),
+    cert: fs.readFileSync(join(__dirname, '..','ssl', 'example.com+2.pem'))
+  }, app);
 
-const server = https.createServer({
-  key: fs.readFileSync(join(__dirname, '..','ssl', 'example.com+2-key.pem')),
-  cert: fs.readFileSync(join(__dirname, '..','ssl', 'example.com+2.pem'))
-}, app).listen(port);
+  const apolloServer = new ApolloServer({
+    ...schema,
+    plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
+  });
 
-// Call app.setup to initialize all services and SocketIO
-app.setup(server);
+  // Call app.setup to initialize all services and SocketIO
+  app.setup(httpServer);
 
-app.set('server',server);
+  await apolloServer.start();
+  apolloServer.applyMiddleware({ app });
+  app.use(express.notFound());
+  return new Promise((resolve, reject) => {
 
-process.on('unhandledRejection', (reason, p) =>
-  logger.error('Unhandled Rejection at: Promise ', p, reason)
-);
+    // process.on('unhandledRejection', (reason, p) =>
+    //   logger.error('Unhandled Rejection at: Promise ', p, reason)
+    // );
+    httpServer.listen(port).once('listening', resolve).once('unhandledRejection', reject)
+  })
+}
 
-server.on('listening', () =>
-  logger.info('Feathers application started on https://%s:%d', app.get('host'), port)
-);
+
+(
+  async () =>{
+    try {
+      await listen(port)
+      logger.info('GraphQl application started on https://%s:%d/%s', app.get('host'), port,'graphql')
+      logger.info('Rest application started on https://%s:%d', app.get('host'), port)
+      }catch (reason){
+        logger.error('Unhandled Rejection at: Promise ', reason)
+    }
+  }
+)()

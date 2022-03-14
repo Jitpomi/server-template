@@ -1,10 +1,14 @@
 import { Graphql } from './graphql.class';
 import hooks from './graphql.hooks';
+// import { ApolloServerPluginDrainHttpServer } from 'apollo-server-core'
 import { schema } from '../../nexus/schema';
 export default async function (app) {
     try {
+        const httpServer = app.get('server');
+        // const plugins =  [ApolloServerPluginDrainHttpServer({ httpServer })];
         const options = {
             schema,
+            // plugins,
         };
         const apolloServer = new Graphql(options);
         await apolloServer.start();
